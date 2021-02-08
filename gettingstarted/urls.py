@@ -18,6 +18,7 @@ import hello.views
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
+    path("pos/", include("pos.urls")),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
