@@ -159,6 +159,17 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Product.objects.all()
+        barcode = self.request.query_params.get('barcode', None)
+        if barcode is not None:
+            queryset = queryset.filter(barcode=barcode)
+        return queryset
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """

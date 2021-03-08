@@ -43,6 +43,7 @@ class Snippet(models.Model):
 class Product(models.Model):
     description = models.CharField(max_length=200)
     harga = models.DecimalField(max_digits=9, decimal_places=2)
-
+    barcode = models.CharField(max_length=200)
+    
     def __str__(self):
         return self.description
