@@ -13,7 +13,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework import permissions
 from pos.permissions import IsOwnerOrReadOnly
-
+from rest_framework import filters
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):
@@ -158,16 +158,11 @@ class UserDetail(generics.RetrieveAPIView):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$description', '$barcode']
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
         queryset = Product.objects.all()
-        barcode = self.request.query_params.get('barcode', None)
-        if barcode is not None:
-            queryset = queryset.filter(barcode=barcode)
         return queryset
 
 
@@ -175,8 +170,10 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     Api point that lets users to be viewd or edited
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email']
 
 
 class GroupViewSet(viewsets.ModelViewSet):
