@@ -5,7 +5,7 @@ from .models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'description', 'harga', 'barcode')
+        fields = ('id', 'description', 'harga', 'barcode', 'diskon')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
