@@ -4,6 +4,8 @@ from pygments.styles import get_all_styles
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
+from pos.financemodels import PaymentMethod, Spending
+import datetime
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICE = sorted([(item[1][0]), item[0]] for item in LEXERS)
@@ -39,12 +41,113 @@ class Snippet(models.Model):
     class Meta:
         ordering = ['created']
 
+class Supplier(models.Model):
+    address = models.CharField(max_length=254)
+    phone = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Faktur(models.Model):
+    supplier = models.ForeignKey(
+        Supplier,
+        on_delete=models.DO_NOTHING,
+        unique=False
+    )
+
+    spending = models.OneToOneField(
+        Spending,
+        on_delete=models.CASCADE
+    )
+
+    date = models.DateTimeField(auto_now_add=True)
+
+
+class Promotion(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=200,null=True, blank=True)
+    dateFrom = models.DateTimeField(auto_now_add=False, default=datetime.date.today)
+    dateTo = models.DateTimeField(auto_now_add=False, default=datetime.date.today)
+    created = models.DateTimeField(auto_now_add=True)
+    percentage = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+class MainCategory(models.Model):
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.description
+
+class SubCategoryOne(models.Model):
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.description
+
+class SubCategoryTwo(models.Model):
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.description
 
 class Product(models.Model):
     description = models.CharField(max_length=200)
-    harga = models.DecimalField(max_digits=9, decimal_places=2)
+    hargaBeli = models.DecimalField(max_digits=9, decimal_places=2)
+    hargaJual = models.DecimalField(max_digits=9, decimal_places=2)
     barcode = models.CharField(max_length=200)
-    diskon = models.CharField(max_length=3)
+    returnable = models.BooleanField(default=False)
+
+    promotions = models.ForeignKey(
+        Promotion,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        unique=False
+    )
+
+    mainCategory = models.ForeignKey(
+        MainCategory,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        unique=False
+    )
+
+    subCategoryOne = models.ForeignKey(
+        SubCategoryOne,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        unique=False
+    )
+
+    subCategoryTwo = models.ForeignKey(
+        SubCategoryTwo,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        unique=False
+    )
     
     def __str__(self):
         return self.description
+
+class ProductFaktur(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.DO_NOTHING,
+        unique=False
+    )
+    faktur = models.ForeignKey(
+        Faktur,
+        on_delete=models.DO_NOTHING,
+        unique=False
+    )
+    quantity = models.IntegerField(default=1)
+    detail = models.CharField(max_length=200, blank=True, null=True)
+
+

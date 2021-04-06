@@ -1,11 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from .models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE
+from .models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE, Promotion
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'description', 'harga', 'barcode', 'diskon')
+        fields = ('id', 'description', 'hargaBeli', 'hargaJual', 'barcode', 'returnable')
+
+class PromotionSerializer(serializers.HyperlinkedModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Promotion
+        fields = ['name', 'description', 'dateFrom', 'dateTo', 'created', 'percentage', 'products']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,6 +20,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'groups', 'snippets']
+
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from .serializers import ProductSerializer, UserSerializer, GroupSerializer, SnippetSerializer
+from .serializers import PromotionSerializer
 from .models import Product
 from rest_framework import mixins
 from rest_framework import generics
@@ -14,6 +15,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from pos.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
+from pos.models import Promotion
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):
@@ -166,10 +168,11 @@ class ProductViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class ProductPromotionViewSet(viewsets.ModelViewSet):
+    queryset = Promotion.objects.all()
+    serializer_class = PromotionSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    Api point that lets users to be viewd or edited
-    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = [filters.SearchFilter]
