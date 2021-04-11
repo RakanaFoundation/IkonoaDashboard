@@ -5,7 +5,14 @@ from .models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE, Promotion
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'description', 'hargaBeli', 'hargaJual', 'barcode', 'returnable')
+        fields = (
+            'id', 
+            'description', 
+            'hargaBeli', 
+            'hargaJual', 
+            'barcode', 
+            'returnable'
+            )
 
 class PromotionSerializer(serializers.HyperlinkedModelSerializer):
     products = ProductSerializer(many=True, read_only=True)
@@ -53,3 +60,5 @@ class SnippetSerializer(serializers.HyperlinkedModelSerializer):
         model = Snippet
         owner = serializers.ReadOnlyField(source='owner.username')
         fields = ['id', 'title', 'code', 'linenos', 'language', 'style', 'owner']
+
+

@@ -4,7 +4,8 @@ from pygments.styles import get_all_styles
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
-from pos.financemodels import PaymentMethod, Spending
+from pos.financemodels import Spending
+from pos.promotionmodels import Promotion
 import datetime
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
@@ -63,18 +64,6 @@ class Faktur(models.Model):
     )
 
     date = models.DateTimeField(auto_now_add=True)
-
-
-class Promotion(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200,null=True, blank=True)
-    dateFrom = models.DateTimeField(auto_now_add=False, default=datetime.date.today)
-    dateTo = models.DateTimeField(auto_now_add=False, default=datetime.date.today)
-    created = models.DateTimeField(auto_now_add=True)
-    percentage = models.IntegerField()
-
-    def __str__(self):
-        return self.name
 
 class MainCategory(models.Model):
     description = models.CharField(max_length=200)

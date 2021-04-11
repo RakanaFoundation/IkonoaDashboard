@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .financemodels import *
+from .salesmodels import *
 from .models import *
 from .shipmentmodels import *
 from .usermodels import *
@@ -27,7 +28,6 @@ admin.site.register(OrderReturn)
 
 # finance
 admin.site.register(Spending)
-admin.site.register(PaymentMethod)
 admin.site.register(Payment)
 admin.site.register(SalesTransaction)
 admin.site.register(ProductSalesTransaction)
