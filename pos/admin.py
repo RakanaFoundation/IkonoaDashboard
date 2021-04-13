@@ -6,6 +6,8 @@ from .models import *
 from .shipmentmodels import *
 from .usermodels import *
 from .inventorymodels import *
+from .notamodels import *
+from .cabangmodels import *
 
 # Register your models here.
 admin.site.register(Product)
@@ -18,7 +20,6 @@ admin.site.register(ProductFaktur)
 admin.site.register(Faktur)
 
 # shipment
-admin.site.register(Cabang)
 admin.site.register(Order)
 admin.site.register(OrderRequest)
 admin.site.register(OrderReceived)
@@ -38,5 +39,12 @@ admin.site.register(Employee)
 # inventory
 admin.site.register(Inventory)
 admin.site.register(ProductInventory)
+
+# cabang
+admin.site.register(Cabang)
+
+# nota
+admin.site.register(NotaCabang)
+
 
 

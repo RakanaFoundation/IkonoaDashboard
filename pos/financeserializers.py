@@ -5,10 +5,12 @@ from .cabangmodels import Cabang
 from .usermodels import Employee
 from .models import Product
 from .promotionmodels import Promotion
+from .notamodels import NotaCabang
 from .userserializers import EmployeeSerializers
 from .cabangserializers import CabangSerializer
 from .serializers import ProductSerializer
 from .promotionserializers import PromotionSerializer
+from datetime import datetime
 import json
 
 class PaymentSerializer(serializers.ModelSerializer):
@@ -81,7 +83,7 @@ class GetSalesTransactionSerializer(serializers.ModelSerializer):
 class CreateSalesTransactionSerializer(serializers.ModelSerializer):
     payment = PaymentSerializer(many=False)
     productSales = CreateProductSalesSerializers(many=True)
-    promotion = serializers.CharField()
+    promotion = serializers.CharField(allow_null=True, required=False)
 
     class Meta:
         model = SalesTransaction
@@ -116,9 +118,16 @@ class CreateSalesTransactionSerializer(serializers.ModelSerializer):
 
         promoData = validated_data.get('promotion')
 
-        promotion = Promotion.objects.get(name=promoData)
+        promotion = None
+        if promoData is not None:
+            promotion = Promotion.objects.get(name=promoData)
+            
+        notaCabang = NotaCabang.objects.get(cabang=cabang)
+
+        salesNumber = str(cabang.code) + str(notaCabang.notanumber) + str(datetime.today().strftime('%d%m%y'))
         
         salesTransaction = SalesTransaction.objects.create(
+            sales_id = salesNumber,
             amount = amount,
             detail = detail,
             comment = comment,

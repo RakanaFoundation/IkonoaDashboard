@@ -60,19 +60,8 @@ class Payment(models.Model):
     def __str__(self):
         return str(self.amount) + str(self.detail)
 
-def increment_sales_number():
-    last_sales = SalesTransaction.objects.all().order_by('id').last()
-    if not last_sales:
-        return 'STR' +str(datetime.date.today().year) + str(datetime.date.today().month).zfill(2) + '0000'
-    
-    sales_id = last_sales.sales_id
-    sales_int = int(sales_id[9:13])
-    new_sales_int = sales_int + 1
-    new_sales_id = 'STR' + str(datetime.date.today().year) + str(datetime.date.today().month).zfill(2) + str(new_sales_int).zfill(4)
-    return new_sales_id
-
 class SalesTransaction(models.Model):
-    sales_id = models.CharField(max_length = 200, default = increment_sales_number, editable=False)
+    sales_id = models.CharField(max_length = 200, default = '')
     date = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     detail = models.CharField(max_length=200, blank=True, null=True)

@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
             name='SalesTransaction',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sales_id', models.CharField(default=pos.financemodels.increment_sales_number, editable=False, max_length=200)),
+                ('sales_id', models.CharField(default='', editable=False, max_length=200)),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=15)),
                 ('detail', models.CharField(blank=True, max_length=200, null=True)),
