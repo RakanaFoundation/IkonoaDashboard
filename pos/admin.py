@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .financemodels import *
 from .salesmodels import *
 from .models import *
@@ -8,14 +7,15 @@ from .usermodels import *
 from .inventorymodels import *
 from .notamodels import *
 from .cabangmodels import *
+from pos.modeladmin import ShowIdAdmin
 
 # Register your models here.
-admin.site.register(Product)
+admin.site.register(Product, ShowIdAdmin)
 admin.site.register(Promotion)
 admin.site.register(MainCategory)
 admin.site.register(SubCategoryOne)
 admin.site.register(SubCategoryTwo)
-admin.site.register(Supplier)
+admin.site.register(Supplier, ShowIdAdmin)
 admin.site.register(ProductFaktur)
 admin.site.register(Faktur)
 
@@ -29,12 +29,12 @@ admin.site.register(OrderReturn)
 
 # finance
 admin.site.register(Spending)
-admin.site.register(Payment)
-admin.site.register(SalesTransaction)
-admin.site.register(ProductSalesTransaction)
+admin.site.register(Payment, ShowIdAdmin)
+admin.site.register(SalesTransaction, ShowIdAdmin)
+admin.site.register(ProductSalesTransaction, ShowIdAdmin)
 
 # user
-admin.site.register(Employee)
+admin.site.register(Employee, ShowIdAdmin)
 
 # inventory
 admin.site.register(Inventory)
@@ -42,7 +42,7 @@ admin.site.register(ProductInventory)
 admin.site.register(PusatProductInventory)
 
 # cabang
-admin.site.register(Cabang)
+admin.site.register(Cabang, ShowIdAdmin)
 
 # nota
 admin.site.register(NotaCabang)
