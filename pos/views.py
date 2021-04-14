@@ -167,7 +167,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         queryset = Product.objects.all()
         return queryset
 
-
 class ProductPromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer

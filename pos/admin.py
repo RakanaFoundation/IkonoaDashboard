@@ -39,6 +39,7 @@ admin.site.register(Employee)
 # inventory
 admin.site.register(Inventory)
 admin.site.register(ProductInventory)
+admin.site.register(PusatProductInventory)
 
 # cabang
 admin.site.register(Cabang)

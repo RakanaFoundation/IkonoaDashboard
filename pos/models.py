@@ -6,6 +6,7 @@ from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
 from pos.financemodels import Spending
 from pos.promotionmodels import Promotion
+from pos.cabangmodels import Cabang
 import datetime
 
 LEXERS = [item for item in get_all_lexers() if item[1]]

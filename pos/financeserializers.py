@@ -11,7 +11,25 @@ from .cabangserializers import CabangSerializer
 from .serializers import ProductSerializer
 from .promotionserializers import PromotionSerializer
 from datetime import datetime
+from django.db.models import F
 import json
+
+class SpendingSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Payment
+        
+        fields = [
+            'id', 
+            'amount', 
+            'detail', 
+            'date', 
+            'refund', 
+            'paymethod',
+            'expiryDate',
+            'paymethod'
+            ]
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     
@@ -73,12 +91,67 @@ class GetSalesTransactionSerializer(serializers.ModelSerializer):
             'payment',
             'detail',
             'productSales',
-            'promotion'
+            'promotion',
+            'refund'
             ]
 
     def get_product_sales(self, salesTransaction):
         return GetProductSalesSerializers(
             ProductSalesTransaction.objects.filter(salesTransaction = salesTransaction), many=True).data
+
+def doCreateSalesTransaction(validated_data):
+    amount = validated_data.get('amount')
+    detail = validated_data.get('detail')
+    comment = validated_data.get('comment')
+
+    employeeData = validated_data.get('employee')
+    employee = Employee.objects.get(id=employeeData.id)
+    
+    cabangData = validated_data.get('cabang')
+    cabang = Cabang.objects.get(id=cabangData.id)
+    
+    paymentData = validated_data.get('payment')
+
+    payment = Payment.objects.create(**paymentData)
+
+    promoData = validated_data.get('promotion')
+
+    promotion = None
+    if promoData is not None:
+        promotion = Promotion.objects.get(name=promoData)
+        
+    try:
+        notaCabang = NotaCabang.objects.get(cabang=cabang)
+    except NotaCabang.DoesNotExist:
+        notaCabang = NotaCabang.objects.create(
+            cabang=cabang
+        )
+
+    salesNumber = str(cabang.code) + str(notaCabang.notanumber) + str(datetime.today().strftime('%d%m%y'))
+    NotaCabang.objects.filter(cabang=cabang).update(notanumber=F('notanumber') + 1) 
+    
+    salesTransaction = SalesTransaction.objects.create(
+        sales_id = salesNumber,
+        amount = amount,
+        detail = detail,
+        comment = comment,
+        employee = employee,
+        payment = payment,
+        cabang = cabang,
+        promotion = promotion
+    )
+
+    productSalesData = validated_data.get('productSales')
+    for productSales in productSalesData:
+        productId = productSales.get("product")
+        product = Product.objects.get(id=productId)
+        ProductSalesTransaction.objects.create(
+            product=product,
+            salesTransaction=salesTransaction,
+            amount = productSales.get("amount"),
+            quantity = productSales.get("quantity")
+        )
+    return validated_data
 
 class CreateSalesTransactionSerializer(serializers.ModelSerializer):
     payment = PaymentSerializer(many=False)
@@ -101,53 +174,43 @@ class CreateSalesTransactionSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        return doCreateSalesTransaction(validated_data)
         
-        amount = validated_data.get('amount')
-        detail = validated_data.get('detail')
-        comment = validated_data.get('comment')
 
-        employeeData = validated_data.get('employee')
-        employee = Employee.objects.get(id=employeeData.id)
-        
-        cabangData = validated_data.get('cabang')
-        cabang = Cabang.objects.get(id=cabangData.id)
-        
-        paymentData = validated_data.get('payment')
+class CreateReturSalesTransactionSerializer(serializers.ModelSerializer):
+    retur_sales_id = serializers.CharField(required=True)
+    payment = PaymentSerializer(many=False)
+    productSales = CreateProductSalesSerializers(many=True)
+    promotion = serializers.CharField(allow_null=True, required=False)
 
-        payment = Payment.objects.create(**paymentData)
+    class Meta:
+        model = SalesTransaction
+        fields = [
+        'retur_sales_id', 
+        'date', 
+        'amount', 
+        'comment', 
+        'employee',
+        'cabang',
+        'payment',
+        'detail', 
+        'productSales',
+        'promotion'
+        ]
 
-        promoData = validated_data.get('promotion')
+    def create(self, validated_data):
+        returSalesId = validated_data.get("retur_sales_id")
+        oldSales = SalesTransaction.objects.get(sales_id=returSalesId)
+        oldSales.refund = True
+        oldSales.save()
 
-        promotion = None
-        if promoData is not None:
-            promotion = Promotion.objects.get(name=promoData)
-            
-        notaCabang = NotaCabang.objects.get(cabang=cabang)
+        oldPaymentToRetur = oldSales.payment
+        oldPaymentToRetur.refund = True
+        oldPaymentToRetur.save()
 
-        salesNumber = str(cabang.code) + str(notaCabang.notanumber) + str(datetime.today().strftime('%d%m%y'))
-        
-        salesTransaction = SalesTransaction.objects.create(
-            sales_id = salesNumber,
-            amount = amount,
-            detail = detail,
-            comment = comment,
-            employee = employee,
-            payment = payment,
-            cabang = cabang,
-            promotion = promotion
-        )
+        return doCreateSalesTransaction(validated_data)
 
-        productSalesData = validated_data.get('productSales')
-        for productSales in productSalesData:
-            productId = productSales.get("product")
-            product = Product.objects.get(id=productId)
-            ProductSalesTransaction.objects.create(
-                product=product,
-                salesTransaction=salesTransaction,
-                amount = productSales.get("amount"),
-                quantity = productSales.get("quantity")
-            )
-        return validated_data
+
 
 
 

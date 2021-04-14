@@ -66,6 +66,7 @@ class SalesTransaction(models.Model):
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     detail = models.CharField(max_length=200, blank=True, null=True)
     comment = models.CharField(max_length=200, blank=True, null=True)
+    refund = models.BooleanField(default=False)
     employee = models.ForeignKey(
         Employee,
         unique=False,

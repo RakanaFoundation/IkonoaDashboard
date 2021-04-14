@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from . import views, financeviews
+from . import views, financeviews, shipmentviews
 
 router = routers.DefaultRouter()
 router.register(r'product', views.ProductViewSet)
@@ -16,8 +16,9 @@ router.register(r'sales', financeviews.SalesTransactionViewSet)
 urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api/v1/createsales', financeviews.CreateSalesTransactionView.as_view()),
+    path('api/v1/createsalesretur', financeviews.CreateReturSalesTransactionView.as_view()),
+    path('api/v1/createfaktur', shipmentviews.CreateFakturView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view())
 ]

@@ -14,16 +14,16 @@ STATUS_CHOICES = [
 ]
 
 class Order(models.Model):
+    createdDate = models.DateTimeField(
+        auto_now_add=True)
+
+class OrderRequest(models.Model):
     cabang = models.ForeignKey(
         Cabang,
         unique=False,
         on_delete=models.DO_NOTHING
     )
-    createdDate = models.DateTimeField(
-        auto_now_add=False, null=True, 
-        blank=True, default=datetime.date.today)
 
-class OrderRequest(models.Model):
     order = models.ForeignKey(
         Order,
         unique=False,
@@ -82,6 +82,12 @@ class OrderSent(models.Model):
     )
 
 class OrderReturn(models.Model):
+    cabang = models.ForeignKey(
+        Cabang,
+        unique=False,
+        on_delete=models.DO_NOTHING
+    )
+    
     order = models.ForeignKey(
         Order,
         unique=False,

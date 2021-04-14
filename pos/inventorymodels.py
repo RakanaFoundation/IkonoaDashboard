@@ -3,15 +3,30 @@ from pos.models import Product
 from pos.cabangmodels import Cabang
 
 class Inventory(models.Model):
-    cabang = models.ForeignKey(
+    cabang = models.OneToOneField(
         Cabang,
-        unique = False,
         on_delete=models.DO_NOTHING
     )
+
     detail = models.CharField(
         max_length=200, 
         blank=True, 
         null=True)
+    
+class PusatProductInventory(models.Model):
+    product = models.ForeignKey(
+        Product,
+        unique=False,
+        on_delete=models.DO_NOTHING
+    )
+
+    stock = models.IntegerField(
+        default=0
+    )
+
+    reminderStockAt = models.IntegerField(
+        default=0
+    )
 
 class ProductInventory(models.Model):
     inventory = models.ForeignKey(
@@ -24,4 +39,12 @@ class ProductInventory(models.Model):
         Product,
         unique=False,
         on_delete=models.DO_NOTHING
+    )
+
+    stock = models.IntegerField(
+        default=0
+    )
+
+    reminderStockAt = models.IntegerField(
+        default=0
     )
