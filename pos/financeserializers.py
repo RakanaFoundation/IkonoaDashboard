@@ -12,6 +12,7 @@ from .serializers import ProductSerializer
 from .promotionserializers import PromotionSerializer
 from datetime import datetime
 from django.db.models import F
+from pos.inventorysignals import increment_cabang_inventory
 import json
 
 class SpendingSerializer(serializers.ModelSerializer):
@@ -203,6 +204,13 @@ class CreateReturSalesTransactionSerializer(serializers.ModelSerializer):
         oldSales = SalesTransaction.objects.get(sales_id=returSalesId)
         oldSales.refund = True
         oldSales.save()
+
+        try:
+            productSales = ProductSalesTransaction.objects.filter(salesTransaction=oldSales)
+            for prodSale in productSales:
+                increment_cabang_inventory(prodSale)
+        except ProductSalesTransaction.DoesNotExist:
+            pass
 
         oldPaymentToRetur = oldSales.payment
         oldPaymentToRetur.refund = True
