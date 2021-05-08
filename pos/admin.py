@@ -22,10 +22,10 @@ admin.site.register(Faktur)
 # shipment
 admin.site.register(Order)
 admin.site.register(OrderRequest)
-admin.site.register(OrderReceived)
 admin.site.register(Shipment)
 admin.site.register(OrderSent)
 admin.site.register(OrderReturn)
+admin.site.register(ProductOrder)
 
 # finance
 admin.site.register(Spending)

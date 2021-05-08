@@ -18,6 +18,13 @@ urlpatterns = [
     path('api/v1/createsales', financeviews.CreateSalesTransactionView.as_view()),
     path('api/v1/createsalesretur', financeviews.CreateReturSalesTransactionView.as_view()),
     path('api/v1/createfaktur', shipmentviews.CreateFakturView.as_view()),
+    path('api/v1/createrequestorder', shipmentviews.CreateRequestOrder.as_view()),
+    path('api/v1/updatestatusrequestorder', shipmentviews.UpdateStatusRequestOrder.as_view()),
+    path('api/v1/createsentorder', shipmentviews.CreateSentOrder.as_view()),
+    path('api/v1/updatestatussentorder', shipmentviews.UpdateStatusSentOrder.as_view()),
+    path('api/v1/createreturnorder', shipmentviews.CreateReturnOrder.as_view()),
+    path('api/v1/createreturnfromsentorder', shipmentviews.CreateReturnOrderFromSentOrder.as_view()),
+    path('api/v1/updatestatusreturnorder', shipmentviews.UpdateReturOrderSerializers.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('users/', views.UserList.as_view()),
     path('users/<int:pk>/', views.UserDetail.as_view())

@@ -20,11 +20,11 @@ class PusatProductInventory(models.Model):
         on_delete=models.DO_NOTHING
     )
 
-    stock = models.IntegerField(
+    stock = models.PositiveIntegerField(
         default=0
     )
 
-    reminderStockAt = models.IntegerField(
+    reminderStockAt = models.PositiveIntegerField(
         default=0
     )
 
@@ -41,10 +41,10 @@ class ProductInventory(models.Model):
         on_delete=models.DO_NOTHING
     )
 
-    stock = models.IntegerField(
+    stock = models.PositiveIntegerField(
         default=0
     )
 
-    reminderStockAt = models.IntegerField(
+    reminderStockAt = models.PositiveIntegerField(
         default=0
     )
