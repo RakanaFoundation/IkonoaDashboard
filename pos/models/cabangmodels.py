@@ -10,6 +10,12 @@ class Cabang(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=10, default = '')
 
+    # product = models.ForeignKey(
+    #     Product,
+    #     unique=False,
+    #     on_delete=models.DO_NOTHING
+    # )
+
     def __str__(self):
         return self.name
 

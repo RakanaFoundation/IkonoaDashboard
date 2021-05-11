@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from . import views, financeviews, shipmentviews
+from pos.views import views, financeviews, shipmentviews
 
 router = routers.DefaultRouter()
 router.register(r'product', views.ProductViewSet)

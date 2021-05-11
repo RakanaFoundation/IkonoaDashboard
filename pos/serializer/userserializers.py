@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .usermodels import Employee
-from .cabangserializers import CabangSerializer
+from pos.models.usermodels import Employee
+from pos.serializer.cabangserializers import CabangSerializer
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):

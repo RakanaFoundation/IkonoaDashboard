@@ -1,6 +1,6 @@
 from django.db import models
-from pos.models import Product
-from pos.cabangmodels import Cabang
+from pos.models.models import Product
+from pos.models.cabangmodels import Cabang
 
 class Inventory(models.Model):
     cabang = models.OneToOneField(

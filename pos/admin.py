@@ -1,13 +1,14 @@
 from django.contrib import admin
-from .financemodels import *
-from .salesmodels import *
-from .models import *
-from .shipmentmodels import *
-from .usermodels import *
-from .inventorymodels import *
-from .notamodels import *
-from .cabangmodels import *
-from pos.modeladmin import ShowIdAdmin
+from pos.models.modeladmin import ShowIdAdmin
+from pos.models.salesmodels import ProductSalesTransaction
+from pos.models.models import Faktur, MainCategory, Product, ProductFaktur, SubCategoryOne, SubCategoryTwo, Supplier
+from pos.models.promotionmodels import Promotion
+from pos.models.shipmentmodels import Order, OrderRequest, OrderReturn, OrderSent, ProductOrder, Shipment
+from pos.models.usermodels import Employee
+from pos.models.inventorymodels import Inventory, ProductInventory, PusatProductInventory
+from pos.models.notamodels import NotaCabang
+from pos.models.cabangmodels import Cabang
+from pos.models.financemodels import Payment, SalesTransaction, Spending
 
 # Register your models here.
 admin.site.register(Product, ShowIdAdmin)

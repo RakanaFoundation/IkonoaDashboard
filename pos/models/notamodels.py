@@ -1,5 +1,5 @@
 from django.db import models
-from pos.cabangmodels import Cabang
+from pos.models.cabangmodels import Cabang
 
 class NotaCabang(models.Model):
     cabang = models.ForeignKey(

@@ -1,9 +1,9 @@
 from django.db import models
 import datetime
-from pos.cabangmodels import Cabang
-from pos.usermodels import Employee
+from pos.models.cabangmodels import Cabang
+from pos.models.usermodels import Employee
 import datetime
-from pos.promotionmodels import Promotion
+from pos.models.promotionmodels import Promotion
 
 CASH = 'CASH'
 GIRO = 'GIRO'

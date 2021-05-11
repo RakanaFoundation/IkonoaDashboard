@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pos.promotionmodels import Promotion
+from pos.models.promotionmodels import Promotion
 
 class PromotionSerializer(serializers.ModelSerializer):
 

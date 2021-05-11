@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .cabangmodels import Cabang
+from pos.models.cabangmodels import Cabang
 
 class CabangSerializer(serializers.ModelSerializer):
 

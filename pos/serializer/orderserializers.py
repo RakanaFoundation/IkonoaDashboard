@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from pos.shipmentmodels import *
-from pos.inventorymodels import Inventory
-from pos.cabangmodels import Cabang
-from pos.models import Product
-from pos.inventorymodels import ProductInventory
+from pos.models.shipmentmodels import *
+from pos.models.inventorymodels import Inventory
+from pos.models.cabangmodels import Cabang
+from pos.models.models import Product
+from pos.models.inventorymodels import ProductInventory
 from pos.inventorysignals import incrementCabangInventory, reduceCabangInventory, incrementPusatInventory, reducePusatInventory
 
 

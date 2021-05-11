@@ -1,21 +1,21 @@
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from .serializers import ProductSerializer, UserSerializer, GroupSerializer, SnippetSerializer
-from .serializers import PromotionSerializer
-from .models import Product
+from pos.serializer.serializers import ProductSerializer, UserSerializer, GroupSerializer, SnippetSerializer
+from pos.serializer.serializers import PromotionSerializer
+from pos.models.models import Product
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Snippet
+from pos.models.models import Snippet
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework import permissions
 from pos.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
-from pos.models import Promotion
+from pos.models.models import Promotion
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):

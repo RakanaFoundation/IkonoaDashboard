@@ -1,8 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from pos.models import ProductFaktur
-from pos.inventorymodels import Inventory, ProductInventory, PusatProductInventory
-from pos.salesmodels import ProductSalesTransaction
+from pos.models.models import ProductFaktur
+from pos.models.inventorymodels import Inventory, ProductInventory, PusatProductInventory
+from pos.models.salesmodels import ProductSalesTransaction
 from django.db.models import F
 from django.db import IntegrityError, transaction
 

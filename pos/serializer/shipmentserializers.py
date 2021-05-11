@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from pos.models import Faktur, Supplier, ProductFaktur, Product
-from pos.financemodels import Spending
-from pos.financeserializers import SpendingSerializer
+from pos.models.models import Faktur, Supplier, ProductFaktur, Product
+from pos.models.financemodels import Spending
+from pos.serializer.financeserializers import SpendingSerializer
 
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:

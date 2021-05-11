@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView
-from .models import Faktur
-from .shipmentmodels import *
-from .shipmentserializers import CreateFakturSerializer
-from .orderserializers import *
+from pos.models.models import Faktur
+from pos.models.shipmentmodels import *
+from pos.serializer.shipmentserializers import CreateFakturSerializer
+from pos.serializer.orderserializers import *
 
 class CreateFakturView(CreateAPIView):
     queryset = Faktur.objects.all()

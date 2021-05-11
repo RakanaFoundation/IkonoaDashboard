@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from .models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE, Promotion
+from pos.models.models import Product, Snippet, LANGUAGE_CHOICE, STYLE_CHOICE, Promotion
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

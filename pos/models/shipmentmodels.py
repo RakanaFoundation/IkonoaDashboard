@@ -1,7 +1,7 @@
 from django.db import models
-from pos.financemodels import SalesTransaction
-from pos.cabangmodels import Cabang
-from pos.models import Product
+from pos.models.financemodels import SalesTransaction
+from pos.models.cabangmodels import Cabang
+from pos.models.models import Product
 import datetime
 
 REJECT = 'REJECT'

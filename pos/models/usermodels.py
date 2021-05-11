@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pos.cabangmodels import Cabang
+from pos.models.cabangmodels import Cabang
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

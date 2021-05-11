@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView
-from .financemodels import *
-from .financeserializers import *
+from pos.models.financemodels import *
+from pos.serializer.financeserializers import *
 from rest_framework import filters
 
 class PaymentViewSet(viewsets.ModelViewSet):

@@ -4,9 +4,9 @@ from pygments.styles import get_all_styles
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
-from pos.financemodels import Spending
-from pos.promotionmodels import Promotion
-from pos.cabangmodels import Cabang
+from pos.models.financemodels import Spending
+from pos.models.promotionmodels import Promotion
+from pos.models.cabangmodels import Cabang
 import datetime
 
 LEXERS = [item for item in get_all_lexers() if item[1]]

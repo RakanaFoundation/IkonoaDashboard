@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from .financemodels import Payment, SalesTransaction
-from .salesmodels import ProductSalesTransaction
-from .cabangmodels import Cabang
-from .usermodels import Employee
-from .models import Product
-from .promotionmodels import Promotion
-from .notamodels import NotaCabang
-from .userserializers import EmployeeSerializers
-from .cabangserializers import CabangSerializer
-from .serializers import ProductSerializer
-from .promotionserializers import PromotionSerializer
+from pos.models.financemodels import Payment, SalesTransaction
+from pos.models.salesmodels import ProductSalesTransaction
+from pos.models.cabangmodels import Cabang
+from pos.models.usermodels import Employee
+from pos.models.models import Product
+from pos.models.promotionmodels import Promotion
+from pos.models.notamodels import NotaCabang
+from pos.serializer.userserializers import EmployeeSerializers
+from pos.serializer.cabangserializers import CabangSerializer
+from pos.serializer.serializers import ProductSerializer
+from pos.serializer.promotionserializers import PromotionSerializer
 from datetime import datetime
 from django.db.models import F
 from pos.inventorysignals import incrementCabangInventory

@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-from pos.cabangmodels import Cabang
+from pos.models.cabangmodels import Cabang
 
 
 class Migration(migrations.Migration):
