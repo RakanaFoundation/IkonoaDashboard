@@ -1,6 +1,7 @@
 from django.db import models
-from pos.models.models import Product
 from pos.models.financemodels import SalesTransaction
+from pos.models.models import Product
+
 
 class ProductSalesTransaction(models.Model):
     product = models.ForeignKey(

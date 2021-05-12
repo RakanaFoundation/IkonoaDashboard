@@ -8,6 +8,8 @@ from pos.models.financemodels import Spending
 from pos.models.promotionmodels import Promotion
 from pos.models.cabangmodels import Cabang
 import datetime
+from pos.models.departmentmodels import Dept
+from pos.models.mclassmodel import Mclass
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICE = sorted([(item[1][0]), item[0]] for item in LEXERS)
@@ -48,6 +50,7 @@ class Supplier(models.Model):
     phone = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=100)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -85,10 +88,22 @@ class SubCategoryTwo(models.Model):
         return self.description
 
 class Product(models.Model):
-    description = models.CharField(max_length=200)
-    hargaBeli = models.DecimalField(max_digits=9, decimal_places=2)
-    hargaJual = models.DecimalField(max_digits=9, decimal_places=2)
+    sku = models.IntegerField()
     barcode = models.CharField(max_length=200)
+
+    description = models.CharField(max_length=200)
+
+    hargaBeli = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    hargaJual = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+
+    hargaJual2 = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    hargaJual3 = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    hargaBeliBesar = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    hpp = models.IntegerField()
+
+    dept = models.ForeignKey(Dept, on_delete=models.DO_NOTHING)
+    mclass = models.ForeignKey(Mclass, on_delete=models.DO_NOTHING)
+
     returnable = models.BooleanField(default=False)
 
     promotions = models.ForeignKey(
