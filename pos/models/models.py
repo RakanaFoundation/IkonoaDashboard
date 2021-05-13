@@ -99,7 +99,7 @@ class Product(models.Model):
     hargaJual2 = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     hargaJual3 = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     hargaBeliBesar = models.DecimalField(max_digits=9, decimal_places=2, default=0)
-    hpp = models.IntegerField()
+    hpp = models.IntegerField(default=0)
 
     dept = models.ForeignKey(Dept, on_delete=models.DO_NOTHING)
     mclass = models.ForeignKey(Mclass, on_delete=models.DO_NOTHING)

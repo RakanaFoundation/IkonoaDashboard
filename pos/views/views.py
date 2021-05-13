@@ -16,6 +16,7 @@ from rest_framework import permissions
 from pos.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
 from pos.models.models import Promotion
+from rest_framework.permissions import IsAuthenticated
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):
@@ -62,13 +63,13 @@ from pos.models.models import Promotion
 #     def post(self, request, *args, **kwargs):
 #         return self.create(request, *args, **kwargs)
 
-class SnippetList(generics.ListCreateAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
 
 
 # @api_view(['GET', 'PUT', 'DELETE'])
@@ -141,20 +142,22 @@ class SnippetList(generics.ListCreateAPIView):
 #         return self.destroy(request, *args, **kwargs)
 
 
-class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -162,6 +165,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['$description', '$barcode']
+    permission_classes = [IsAuthenticated]
+    
 
     def get_queryset(self):
         queryset = Product.objects.all()
@@ -170,12 +175,14 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ProductPromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
+    permission_classes = [IsAuthenticated]
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['username', 'email']
+    permission_classes = [IsAuthenticated]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -184,3 +191,4 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [IsAuthenticated]
