@@ -4,4 +4,4 @@ class District(models.Model):
     name = models.CharField(max_length=125)
 
     def __str__(self):
-        return self.nama_distrik
+        return self.name

@@ -9,6 +9,7 @@ from pos.models.inventorymodels import Inventory, ProductInventory, PusatProduct
 from pos.models.notamodels import NotaCabang
 from pos.models.cabangmodels import Cabang
 from pos.models.financemodels import Payment, SalesTransaction, Spending
+from pos.models.districtmodels import District
 
 # Register your models here.
 admin.site.register(Product, ShowIdAdmin)
@@ -47,6 +48,8 @@ admin.site.register(Cabang, ShowIdAdmin)
 
 # nota
 admin.site.register(NotaCabang)
+
+admin.site.register(District)
 
 
 
