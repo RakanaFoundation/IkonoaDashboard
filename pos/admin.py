@@ -10,6 +10,8 @@ from pos.models.notamodels import NotaCabang
 from pos.models.cabangmodels import Cabang
 from pos.models.financemodels import Payment, SalesTransaction, Spending
 from pos.models.districtmodels import District
+from pos.models.departmentmodels import DeptGrup, Dept
+from pos.models.mclassmodel import Mclass
 
 # Register your models here.
 admin.site.register(Product, ShowIdAdmin)
@@ -48,8 +50,12 @@ admin.site.register(Cabang, ShowIdAdmin)
 
 # nota
 admin.site.register(NotaCabang)
-
 admin.site.register(District)
+
+# product
+admin.site.register(Dept)
+admin.site.register(DeptGrup)
+admin.site.register(Mclass)
 
 
 

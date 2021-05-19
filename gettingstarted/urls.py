@@ -3,14 +3,9 @@ from django.urls import path, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenRefreshView
-)
-
+from rest_framework.authtoken import views
 from .logintokenpairview import LoginTokenPairView
-
 admin.autodiscover()
-
 import hello.views
 
 # To add a new path, first import the app:
@@ -26,6 +21,5 @@ urlpatterns = [
     path("pos/", include("pos.urls")),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
-    path('token/', LoginTokenPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
+    path('api-token-auth/', LoginTokenPairView.as_view(), name='api-tokn-auth'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
