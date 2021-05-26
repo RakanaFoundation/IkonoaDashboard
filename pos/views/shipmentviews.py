@@ -5,7 +5,6 @@ from pos.models.shipmentmodels import *
 from pos.serializer.shipmentserializers import CreateFakturSerializer
 from pos.serializer.orderserializers import *
 
-
 class CreateFakturView(CreateAPIView):
     queryset = Faktur.objects.all()
     serializer_class = CreateFakturSerializer

@@ -4,7 +4,6 @@ from pos.models.financemodels import *
 from pos.serializer.financeserializers import *
 from rest_framework import filters
 
-
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer

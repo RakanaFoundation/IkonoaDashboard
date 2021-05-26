@@ -254,7 +254,6 @@ class CreateReturnOrderSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         cabangId = validated_data.get('cabang')
-        print("ASU " + str(cabangId))
         cabang = Cabang.objects.get(id = cabangId)
 
         order = Order.objects.create(
