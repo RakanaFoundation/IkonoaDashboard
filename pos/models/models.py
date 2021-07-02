@@ -46,8 +46,8 @@ class Snippet(models.Model):
         ordering = ['created']
 
 class Supplier(models.Model):
-    address = models.CharField(max_length=254)
-    phone = models.CharField(max_length=50)
+    address = models.CharField(max_length=254, null=True, blank=True)
+    phone = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=100)
     active = models.BooleanField(default=False)
