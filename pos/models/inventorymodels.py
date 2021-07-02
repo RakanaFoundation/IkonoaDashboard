@@ -13,6 +13,9 @@ class Inventory(models.Model):
         blank=True, 
         null=True)
     
+    def __str__(self):
+        return self.detail
+
 class PusatProductInventory(models.Model):
     product = models.ForeignKey(
         Product,
