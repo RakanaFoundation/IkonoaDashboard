@@ -9,3 +9,6 @@ class Employee(models.Model):
         unique=False,
         on_delete=models.DO_NOTHING
     )
+
+    def __str__(self):
+        return self.user
