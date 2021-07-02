@@ -8,7 +8,9 @@ class Cabang(models.Model):
     )
 
     address = models.CharField(max_length=254)
-    phone = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50,
+        null=True,
+        blank=True)
     email = models.EmailField(
         max_length=254,
         null=True,
