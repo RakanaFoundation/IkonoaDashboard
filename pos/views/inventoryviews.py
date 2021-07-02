@@ -28,8 +28,3 @@ class CabangInventoryViews(ListAPIView):
                 return Response({
                         'results': ser.data
                         })
-
-
-
-
-            
