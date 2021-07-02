@@ -19,7 +19,7 @@ class Cabang(models.Model):
     code = models.CharField(max_length=10, default = '')
     
     def __str__(self):
-        return self.name
+        return '%s %s' % (self.name, self.address)
 
 
 
