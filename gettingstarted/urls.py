@@ -1,5 +1,5 @@
 import hello.views
-from pos.views import dashboardviews
+from pos.views.dashboardviews import *
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin
@@ -10,8 +10,9 @@ admin.autodiscover()
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
-    path("login/", dashboardviews.login_view, name="login"),
+    path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
+    path('buyer/', BuyerList.as_view(), name='buyer'),
     path("pos/", include("pos.urls")),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),

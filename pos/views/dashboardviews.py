@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.db.models.base import Model
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from pos.forms import LoginForm
+from django.views.generic import ListView
+from pos.models.buyermodel import Buyer
 
 
 def login_view(request):
@@ -24,3 +26,9 @@ def login_view(request):
             msg = 'Error validating the form'
 
     return render(request, "public/pages/login.html", {"form": form, "msg": msg})
+
+
+class BuyerList(ListView):
+    model = Buyer
+    ordering = ['-id']
+    paginate_by = 10

@@ -12,6 +12,7 @@ from pos.models.financemodels import Payment, SalesTransaction, Spending
 from pos.models.districtmodels import District
 from pos.models.departmentmodels import DeptGrup, Dept
 from pos.models.mclassmodel import Mclass
+from pos.models.buyermodel import Buyer
 
 # Register your models here.
 admin.site.register(Product, ShowIdAdmin)
@@ -57,5 +58,5 @@ admin.site.register(Dept)
 admin.site.register(DeptGrup)
 admin.site.register(Mclass)
 
-
-
+# Customer
+admin.site.register(Buyer)
