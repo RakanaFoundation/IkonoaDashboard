@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login
 from pos.forms import LoginForm
 from django.views.generic import ListView
 from pos.models.buyermodel import Buyer
+from pos.models.cabangmodels import Cabang
+from pos.models.models import *
 
 
 def login_view(request):
@@ -30,5 +32,15 @@ def login_view(request):
 
 class BuyerList(ListView):
     model = Buyer
+    ordering = ['-id']
+    paginate_by = 10
+
+
+class CabangList(ListView):
+    model = Cabang
+
+
+class SupplierList(ListView):
+    model = Supplier
     ordering = ['-id']
     paginate_by = 10

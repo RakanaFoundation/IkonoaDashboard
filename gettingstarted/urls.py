@@ -13,6 +13,7 @@ urlpatterns = [
     path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path('buyer/', BuyerList.as_view(), name='buyer'),
+    path('supplier/', SupplierList.as_view(), name='supplier'),
     path("pos/", include("pos.urls")),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
