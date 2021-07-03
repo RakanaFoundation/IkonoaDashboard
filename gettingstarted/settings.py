@@ -49,6 +49,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "gettingstarted.urls"
+LOGIN_REDIRECT_URL = "index"   # Route defined in gettingstarted/urls.py
+LOGOUT_REDIRECT_URL = "index"  # Route defined in gettingstarted/urls.py
 
 TEMPLATES = [
     {
@@ -79,7 +81,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-     'DEFAULT_PERMISSION_CLASSES':(
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -94,7 +96,7 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE" : "django.db.backends.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }

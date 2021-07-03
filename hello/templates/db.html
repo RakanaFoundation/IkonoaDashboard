@@ -1,20 +1,20 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load static %}
 
 {% block content %}
-  <div class="container">
+<div class="container">
 
 
-<h2>Page View Report</h2>
+  <h2>Page View Report</h2>
 
 
-<ul>
+  <ul>
 
-{% for greeting in greetings %}
+    {% for greeting in greetings %}
     <li>{{ greeting.when }}</li>
-{% endfor %}
+    {% endfor %}
 
-</ul>
+  </ul>
 
 </div>
 
