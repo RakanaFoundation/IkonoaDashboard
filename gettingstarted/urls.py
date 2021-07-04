@@ -10,7 +10,6 @@ from .logintokenpairview import LoginTokenPairView
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^user/$', user_list_view, name='user_filter_view'),
     path("", hello.views.index, name="index"),
     path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
