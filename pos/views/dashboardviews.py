@@ -6,6 +6,11 @@ from django.views.generic import ListView
 from pos.models.buyermodel import Buyer
 from pos.models.cabangmodels import Cabang
 from pos.models.models import *
+from pos.models.financemodels import *
+from django_genericfilters.views import FilteredListView
+from django.contrib.auth.models import User
+from demoproject.filter.forms import UserListForm
+from pos.models.inventorymodels import ProductInventory
 
 
 def login_view(request):
@@ -42,5 +47,34 @@ class CabangList(ListView):
 
 class SupplierList(ListView):
     model = Supplier
+    ordering = ['-id']
+    paginate_by = 10
+
+
+class TransactionList(ListView):
+    model = SalesTransaction
+    ordering = ['-id']
+    paginate_by = 10
+
+
+class UserListView(FilteredListView):
+    # Normal ListView options
+    template_name = 'user/user_list.html'
+    paginate_by = 10
+    context_object_name = 'users'
+    model = User
+
+    # FilteredListView options
+    form_class = UserListForm
+    search_fields = ['first_name', 'last_name', 'username', 'email']
+    filter_fields = ['is_active', 'is_staff', 'is_superuser']
+    default_order = 'last_name'
+
+
+user_list_view = UserListView.as_view()
+
+
+class InventoryList(ListView):
+    model = ProductInventory
     ordering = ['-id']
     paginate_by = 10
