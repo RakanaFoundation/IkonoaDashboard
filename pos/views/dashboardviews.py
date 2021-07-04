@@ -7,8 +7,6 @@ from pos.models.buyermodel import Buyer
 from pos.models.cabangmodels import Cabang
 from pos.models.models import *
 from pos.models.financemodels import *
-from django.contrib.auth.models import User
-from demoproject.filter.forms import UserListForm
 from pos.models.inventorymodels import ProductInventory
 
 
